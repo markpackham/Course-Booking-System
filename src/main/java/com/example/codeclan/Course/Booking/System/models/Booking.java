@@ -26,8 +26,8 @@ public class Booking {
 
     public Booking(String date) {
         this.date = date;
-        this.customers = new ArrayList<>();
-        this.courses = new ArrayList<>();
+        this.customers = new ArrayList<Customer>();
+        this.courses = new ArrayList<Course>();
     }
 
     public Booking(){
@@ -64,5 +64,13 @@ public class Booking {
 
     public void setCourses(List<Course> courses) {
         this.courses = courses;
+    }
+
+    public void addCourse(Course course) {
+        this.courses.add(course);
+    }
+
+    public void addCustomer(Customer customer) {
+        this.customers.add(customer);
     }
 }

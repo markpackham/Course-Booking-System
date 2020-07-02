@@ -15,10 +15,15 @@ public class Customer {
     @Column(name="age")
     private int age;
 
-    public Customer(String name, String town, int age) {
+    @ManyToOne
+    @JoinColumn(name = "booking_id", nullable = false)
+    private Booking booking;
+
+    public Customer(String name, String town, int age, Booking booking) {
         this.name = name;
         this.town = town;
         this.age = age;
+        this.booking = booking;
     }
 
     public Customer(){
@@ -55,5 +60,13 @@ public class Customer {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public Booking getBooking() {
+        return booking;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
     }
 }

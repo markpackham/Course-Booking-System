@@ -15,10 +15,15 @@ public class Course {
     @Column(name="star")
     private int star;
 
-    public Course(String name, String town, int star) {
+    @ManyToOne
+    @JoinColumn(name = "booking_id", nullable = false)
+    private Booking booking;
+
+    public Course(String name, String town, int star, Booking booking) {
         this.name = name;
         this.town = town;
         this.star = star;
+        this.booking = booking;
     }
 
     public Course(){
@@ -55,5 +60,13 @@ public class Course {
 
     public void setStar(int star) {
         this.star = star;
+    }
+
+    public Booking getBooking() {
+        return booking;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
     }
 }
