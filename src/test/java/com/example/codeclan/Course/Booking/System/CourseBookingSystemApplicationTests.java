@@ -11,6 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+
 @SpringBootTest
 class CourseBookingSystemApplicationTests {
 
@@ -28,7 +32,7 @@ class CourseBookingSystemApplicationTests {
 	}
 
 	@Test
-	public void someTest(){
+	public void someTestDataToUse(){
 		Customer customer1 = new Customer("alice","aberdeen",10);
 		Customer customer2 = new Customer("bob","berwick",20);
 		Customer customer3 = new Customer("charles","coatbridge",30);
@@ -48,5 +52,16 @@ class CourseBookingSystemApplicationTests {
 		Booking booking6 = new Booking("03-03-23",course3,customer6);
 	}
 
+	@Test
+	public void canGetRating(){
+		List<Course> foundCourses = courseRepository.findByStar(1);
+		assertEquals(1,foundCourses.size());
+	}
+
+	@Test
+	public void canGetAllBookingsForAGivenDate() {
+		List<Booking> foundBookings = bookingRepository.findByDate("01-01-21");
+		assertEquals(1, foundBookings.size());
+	}
 
 }
