@@ -1,6 +1,10 @@
 package com.example.codeclan.Course.Booking.System.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="customers")
@@ -15,15 +19,15 @@ public class Customer {
     @Column(name="age")
     private int age;
 
-    @ManyToOne
-    @JoinColumn(name = "booking_id", nullable = false)
-    private Booking booking;
+    @JsonBackReference
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    private List<Booking> bookings;
 
-    public Customer(String name, String town, int age, Booking booking) {
+    public Customer(String name, String town, int age) {
         this.name = name;
         this.town = town;
         this.age = age;
-        this.booking = booking;
+        this.bookings = new ArrayList<>();
     }
 
     public Customer(){
@@ -62,11 +66,11 @@ public class Customer {
         this.age = age;
     }
 
-    public Booking getBooking() {
-        return booking;
+    public List<Booking> getBookings() {
+        return bookings;
     }
 
-    public void setBooking(Booking booking) {
-        this.booking = booking;
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
     }
 }

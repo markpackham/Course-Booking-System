@@ -16,18 +16,18 @@ public class Booking {
     @Column(name="date")
     private String date;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "bookings", fetch = FetchType.LAZY)
-    private List<Customer> customers;
+    @ManyToOne
+    @JoinColumn(name = "course_id", nullable = false)
+    private Course course;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "bookings", fetch = FetchType.LAZY)
-    private List<Course> courses;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 
-    public Booking(String date) {
+    public Booking(String date, Course course, Customer customer) {
         this.date = date;
-        this.customers = new ArrayList<Customer>();
-        this.courses = new ArrayList<Course>();
+        this.course = course;
+        this.customer = customer;
     }
 
     public Booking(){
@@ -50,27 +50,19 @@ public class Booking {
         this.date = date;
     }
 
-    public List<Customer> getCustomers() {
-        return customers;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCustomers(List<Customer> customers) {
-        this.customers = customers;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
-    public List<Course> getCourses() {
-        return courses;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
-
-    public void addCourse(Course course) {
-        this.courses.add(course);
-    }
-
-    public void addCustomer(Customer customer) {
-        this.customers.add(customer);
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }
