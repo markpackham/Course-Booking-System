@@ -36,12 +36,12 @@ public class CourseController {
         }
 
         if(name != null){
-            // http://localhost:8080/courses?customerName=Alice
-            return new ResponseEntity(courseRepository.findByBookingsCustomerName(name),HttpStatus.OK);
+            // http://localhost:8080/courses?customerName=alice
+            return new ResponseEntity(courseRepository.findByBookingsCustomerName(name.toLowerCase()),HttpStatus.OK);
         }
         if(town != null){
-            // http://localhost:8080/courses?town=Aberdeen
-            return new ResponseEntity(courseRepository.findByTown(town),HttpStatus.OK);
+            // http://localhost:8080/courses?town=aberdeen
+            return new ResponseEntity(courseRepository.findByTown(town.toLowerCase()),HttpStatus.OK);
         }
 
         return new ResponseEntity(courseRepository.findAll(), HttpStatus.OK);

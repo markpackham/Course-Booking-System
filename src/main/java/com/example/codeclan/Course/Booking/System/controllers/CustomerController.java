@@ -30,12 +30,12 @@ public class CustomerController {
             @RequestParam(required = false, name = "townName") String town
     ){
         if(name != null){
-            // http://localhost:8080/customers?courseName=Algebra
-            return new ResponseEntity(customerRepository.findByBookingsCourseName(name),HttpStatus.OK);
+            // http://localhost:8080/customers?courseName=algebra
+            return new ResponseEntity(customerRepository.findByBookingsCourseName(name.toLowerCase()),HttpStatus.OK);
         }
         if(town != null){
-            // http://localhost:8080/customers?townName=Aberdeen
-            return new ResponseEntity(customerRepository.findByTown(town),HttpStatus.OK);
+            // http://localhost:8080/customers?townName=aberdeen
+            return new ResponseEntity(customerRepository.findByTown(town.toLowerCase()),HttpStatus.OK);
         }
         return new ResponseEntity(customerRepository.findAll(), HttpStatus.OK);
     }

@@ -29,16 +29,16 @@ class CourseBookingSystemApplicationTests {
 
 	@Test
 	public void someTest(){
-		Customer customer1 = new Customer("Alice","Aberdeen",10);
-		Customer customer2 = new Customer("Bob","Berwick",20);
-		Customer customer3 = new Customer("Charles","Coatbridge",30);
-		Customer customer4 = new Customer("Dennis","Dundee",40);
-		Customer customer5 = new Customer("Edgar","Edinburgh",50);
-		Customer customer6 = new Customer("Frank","Falkirk",60);
+		Customer customer1 = new Customer("alice","aberdeen",10);
+		Customer customer2 = new Customer("bob","berwick",20);
+		Customer customer3 = new Customer("charles","coatbridge",30);
+		Customer customer4 = new Customer("dennis","dundee",40);
+		Customer customer5 = new Customer("edgar","edinburgh",50);
+		Customer customer6 = new Customer("frank","falkirk",60);
 
-		Course course1 = new Course("Algebra","Aberdeen",1);
-		Course course2 = new Course("Biology","Berwick",2);
-		Course course3 = new Course("Chemistry","Cardiff",3);
+		Course course1 = new Course("algebra","aberdeen",1);
+		Course course2 = new Course("biology","berwick",2);
+		Course course3 = new Course("chemistry","cardiff",3);
 
 		Booking booking1 = new Booking("01-01-21",course1,customer1);
 		Booking booking2 = new Booking("02-02-22",course2,customer2);
