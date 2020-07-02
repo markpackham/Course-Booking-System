@@ -76,4 +76,12 @@ class CourseBookingSystemApplicationTests {
 		assertEquals(1, foundCourses.size());
 	}
 
+	//Get all customers in a given town for a given course
+
+	@Test
+	public void canGetAllCustomersInATownForACourse(){
+		List<Customer> foundCustomers = customerRepository.findByBookingsCourseNameAndBookingsCourseTown("algebra", "aberdeen");
+		assertEquals(1, foundCustomers.size());
+	}
+
 }
