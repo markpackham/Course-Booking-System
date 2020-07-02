@@ -26,10 +26,18 @@ public class CourseController {
 
     @GetMapping
     public ResponseEntity getAllCoursesAndFilters(
+            @RequestParam(required = false, name = "id") Long id,
             @RequestParam(required = false, name = "star") Integer star,
             @RequestParam(required = false, name = "town") String town,
             @RequestParam(required = false, name = "customerName") String name
     ){
+
+        if(id != null){
+            // http://localhost:8080/courses?id=1
+            return new ResponseEntity(courseRepository.findById(id), HttpStatus.OK);
+        }
+
+
         if(star != null){
             // http://localhost:8080/courses?star=1
             return new ResponseEntity(courseRepository.findByStar(star), HttpStatus.OK);

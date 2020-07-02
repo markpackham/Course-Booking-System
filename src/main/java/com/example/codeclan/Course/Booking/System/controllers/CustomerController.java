@@ -26,9 +26,14 @@ public class CustomerController {
 
     @GetMapping
     public ResponseEntity getAllCustomersAndFilters(
+            @RequestParam(required = false, name = "id") Long id,
             @RequestParam(required = false, name = "courseName") String name,
             @RequestParam(required = false, name = "townName") String town
     ){
+        if(id != null){
+            // http://localhost:8080/customers?id=1
+            return new ResponseEntity(customerRepository.findById(id), HttpStatus.OK);
+        }
         if(name != null){
             // http://localhost:8080/customers?courseName=algebra
             return new ResponseEntity(customerRepository.findByBookingsCourseName(name.toLowerCase()),HttpStatus.OK);

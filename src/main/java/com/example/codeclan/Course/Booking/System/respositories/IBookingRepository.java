@@ -8,4 +8,5 @@ import java.util.List;
 public interface IBookingRepository extends JpaRepository<Booking, Long> {
 
     List<Booking> findByDate(String date);
+    Booking findById(int id);
 }
