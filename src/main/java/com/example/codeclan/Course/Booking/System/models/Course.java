@@ -73,4 +73,8 @@ public class Course {
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
     }
+
+    public void addBooking(Booking booking) {
+        this.bookings.add(booking);
+    }
 }

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,8 +26,12 @@ public class CourseController {
 
     @GetMapping
     public ResponseEntity getAllCoursesAndFilters(
-
+            @RequestParam(required = false, name = "star") Integer star
     ){
+        if(star != null){
+            // http://localhost:8080/courses?star=1
+            return new ResponseEntity(courseRepository.findByStar(star), HttpStatus.OK);
+        }
         return new ResponseEntity(courseRepository.findAll(), HttpStatus.OK);
     }
 }
