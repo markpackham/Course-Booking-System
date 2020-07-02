@@ -26,10 +26,10 @@ public class CustomerController {
 
     @GetMapping
     public ResponseEntity getAllCustomersAndFilters(
-            @RequestParam(required = false, name = "name") String name
+            @RequestParam(required = false, name = "courseName") String name
     ){
         if(name != null){
-            // http://localhost:8080/customers?name=Alice
+            // http://localhost:8080/customers?courseName=Algebra
             return new ResponseEntity(customerRepository.findByBookingsCourseName(name),HttpStatus.OK);
         }
         return new ResponseEntity(customerRepository.findAll(), HttpStatus.OK);
