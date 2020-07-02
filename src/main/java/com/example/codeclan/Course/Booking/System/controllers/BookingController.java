@@ -51,11 +51,4 @@ public class BookingController {
         bookingRepository.deleteById(id);
         return new ResponseEntity(id,HttpStatus.ACCEPTED);
     }
-
-
-    //@DeleteMapping(value = "/users/{id}")
-//    public ResponseEntity<User> deleteUser(@PathVariable Long id) {
-//        userRepository.deleteById(id);
-//        return new ResponseEntity(id, HttpStatus.OK);
-//    }
 }

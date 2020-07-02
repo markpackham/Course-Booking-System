@@ -1,5 +1,6 @@
 package com.example.codeclan.Course.Booking.System.controllers;
 
+import com.example.codeclan.Course.Booking.System.models.Booking;
 import com.example.codeclan.Course.Booking.System.models.Course;
 import com.example.codeclan.Course.Booking.System.models.Customer;
 import com.example.codeclan.Course.Booking.System.respositories.IBookingRepository;
@@ -58,5 +59,11 @@ public class CourseController {
     public ResponseEntity<Course> postCourse(@RequestBody Course course){
         courseRepository.save(course);
         return new ResponseEntity<>(course, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Course> deleteCourse(@PathVariable Long id) {
+        courseRepository.deleteById(id);
+        return new ResponseEntity(id,HttpStatus.ACCEPTED);
     }
 }
