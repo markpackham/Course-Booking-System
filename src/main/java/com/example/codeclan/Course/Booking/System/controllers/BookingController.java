@@ -26,13 +26,13 @@ public class BookingController {
     public ResponseEntity getAllBookingsAndFilters(
             @RequestParam(required = false, name = "id") Long id,
             @RequestParam(required = false, name = "date") String date
-    ){
-        if(id != null){
+    ) {
+        if (id != null) {
             // http://localhost:8080/bookings?id=1
             return new ResponseEntity(bookingRepository.findById(id), HttpStatus.OK);
         }
 
-        if(date != null){
+        if (date != null) {
             // http://localhost:8080/bookings?date=01-01-21
             return new ResponseEntity(bookingRepository.findByDate(date), HttpStatus.OK);
         }
@@ -41,8 +41,21 @@ public class BookingController {
     }
 
     @PostMapping
-    public ResponseEntity<Booking> postBooking(@RequestBody Booking booking){
+    public ResponseEntity<Booking> postBooking(@RequestBody Booking booking) {
         bookingRepository.save(booking);
         return new ResponseEntity<>(booking, HttpStatus.CREATED);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Booking> deleteBooking(@PathVariable Long id) {
+        bookingRepository.deleteById(id);
+        return new ResponseEntity(id,HttpStatus.ACCEPTED);
+    }
+
+
+    //@DeleteMapping(value = "/users/{id}")
+//    public ResponseEntity<User> deleteUser(@PathVariable Long id) {
+//        userRepository.deleteById(id);
+//        return new ResponseEntity(id, HttpStatus.OK);
+//    }
 }
