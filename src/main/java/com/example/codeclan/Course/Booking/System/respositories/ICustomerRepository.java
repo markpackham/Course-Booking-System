@@ -9,7 +9,11 @@ public interface ICustomerRepository extends JpaRepository<Customer, Long> {
         List<Customer> findByBookingsCourseName(String name);
         List<Customer> findByTown(String town);
         Customer findById(int id);
-//        List<Customer> findByCourseNameAndCustomerAgeAndCourseTown(String name, int age, String town);
+//        List<Customer> findByBookingsCourseNameAndBookingsCourseTownAndCustomerAge(String name, String town, int age);
 
         List<Customer> findByBookingsCourseNameAndBookingsCourseTown(String name, String town);
+
+        List<Customer> findByBookingsCourseNameAndBookingsCourseTownAndAgeGreaterThan(String name, String town, int age);
+
+        
 }
