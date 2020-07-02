@@ -26,11 +26,16 @@ public class CustomerController {
 
     @GetMapping
     public ResponseEntity getAllCustomersAndFilters(
-            @RequestParam(required = false, name = "courseName") String name
+            @RequestParam(required = false, name = "courseName") String name,
+            @RequestParam(required = false, name = "townName") String town
     ){
         if(name != null){
             // http://localhost:8080/customers?courseName=Algebra
             return new ResponseEntity(customerRepository.findByBookingsCourseName(name),HttpStatus.OK);
+        }
+        if(town != null){
+            // http://localhost:8080/customers?townName=Aberdeen
+            return new ResponseEntity(customerRepository.findByTown(town),HttpStatus.OK);
         }
         return new ResponseEntity(customerRepository.findAll(), HttpStatus.OK);
     }

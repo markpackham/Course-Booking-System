@@ -27,6 +27,7 @@ public class CourseController {
     @GetMapping
     public ResponseEntity getAllCoursesAndFilters(
             @RequestParam(required = false, name = "star") Integer star,
+            @RequestParam(required = false, name = "town") String town,
             @RequestParam(required = false, name = "customerName") String name
     ){
         if(star != null){
@@ -37,6 +38,10 @@ public class CourseController {
         if(name != null){
             // http://localhost:8080/courses?customerName=Alice
             return new ResponseEntity(courseRepository.findByBookingsCustomerName(name),HttpStatus.OK);
+        }
+        if(town != null){
+            // http://localhost:8080/courses?town=Aberdeen
+            return new ResponseEntity(courseRepository.findByTown(town),HttpStatus.OK);
         }
 
         return new ResponseEntity(courseRepository.findAll(), HttpStatus.OK);
