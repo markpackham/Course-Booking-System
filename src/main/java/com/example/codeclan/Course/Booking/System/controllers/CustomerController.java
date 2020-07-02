@@ -28,8 +28,17 @@ public class CustomerController {
     public ResponseEntity getAllCustomersAndFilters(
             @RequestParam(required = false, name = "id") Long id,
             @RequestParam(required = false, name = "courseName") String name,
-            @RequestParam(required = false, name = "townName") String town
+            @RequestParam(required = false, name = "townName") String town,
+            @RequestParam(required = false, name = "age") Integer age
     ){
+        // http://localhost:8080/customers?courseName=algebra&&townName=aberdeen
+        if(name != null && town != null && age != null){
+            return new ResponseEntity(customerRepository.findByBookingsCourseNameAndBookingsCourseTownAndAgeGreaterThan(name,town,age), HttpStatus.OK);
+        }
+        // http://localhost:8080/customers?courseName=algebra&&townName=aberdeen&&age=9
+        if(name != null && town != null){
+            return new ResponseEntity(customerRepository.findByBookingsCourseNameAndBookingsCourseTown(name,town), HttpStatus.OK);
+        }
         if(id != null){
             // http://localhost:8080/customers?id=1
             return new ResponseEntity(customerRepository.findById(id), HttpStatus.OK);
@@ -38,9 +47,9 @@ public class CustomerController {
             // http://localhost:8080/customers?courseName=algebra
             return new ResponseEntity(customerRepository.findByBookingsCourseName(name.toLowerCase()),HttpStatus.OK);
         }
-        if(town != null){
+        if(town != null) {
             // http://localhost:8080/customers?townName=aberdeen
-            return new ResponseEntity(customerRepository.findByTown(town.toLowerCase()),HttpStatus.OK);
+            return new ResponseEntity(customerRepository.findByTown(town.toLowerCase()), HttpStatus.OK);
         }
         return new ResponseEntity(customerRepository.findAll(), HttpStatus.OK);
     }
