@@ -1,38 +1,40 @@
 package com.example.codeclan.Course.Booking.System.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="customers")
-public class Customer implements Serializable {
+@Table(name = "customers")
+public class Customer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="name")
+
+    @Column(name = "name")
     private String name;
-    @Column(name="town")
+
+    @Column(name = "town")
     private String town;
-    @Column(name="age")
+
+    @Column(name = "age")
     private int age;
 
-    @JsonIgnoreProperties({"customer"})
+    @JsonBackReference
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private List<Booking> bookings;
 
     public Customer(String name, String town, int age) {
         this.name = name;
-        this.town = town;
+        this.town = town.toLowerCase();
+        this.bookings = new ArrayList<Booking>();
         this.age = age;
-        this.bookings = new ArrayList<>();
     }
 
-    public Customer(){
-
+    public Customer() {
     }
 
     public Long getId() {
@@ -56,15 +58,7 @@ public class Customer implements Serializable {
     }
 
     public void setTown(String town) {
-        this.town = town;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
+        this.town = town.toLowerCase();
     }
 
     public List<Booking> getBookings() {
@@ -77,5 +71,13 @@ public class Customer implements Serializable {
 
     public void addBooking(Booking booking) {
         this.bookings.add(booking);
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

@@ -7,31 +7,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="courses")
+@Table(name = "courses")
 public class Course {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="name")
+
+    @Column(name = "name")
     private String name;
-    @Column(name="town")
+
+    @Column(name = "town")
     private String town;
-    @Column(name="star")
-    private int star;
 
     @JsonBackReference
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
     private List<Booking> bookings;
 
+    @Column(name = "star")
+    private int star;
+
     public Course(String name, String town, int star) {
         this.name = name;
-        this.town = town;
+        this.town = town.toLowerCase();
+        this.bookings = new ArrayList<Booking>();
         this.star = star;
-        this.bookings = new ArrayList<>();
     }
 
-    public Course(){
-
+    public Course() {
     }
 
     public Long getId() {
@@ -55,15 +58,7 @@ public class Course {
     }
 
     public void setTown(String town) {
-        this.town = town;
-    }
-
-    public int getStar() {
-        return star;
-    }
-
-    public void setStar(int star) {
-        this.star = star;
+        this.town = town.toLowerCase();
     }
 
     public List<Booking> getBookings() {
@@ -74,7 +69,15 @@ public class Course {
         this.bookings = bookings;
     }
 
-    public void addBooking(Booking booking) {
-        this.bookings.add(booking);
+    public void addBooking(Booking booking){
+        bookings.add(booking);
+    }
+
+    public int getStar() {
+        return star;
+    }
+
+    public void setStar(int star) {
+        this.star = star;
     }
 }

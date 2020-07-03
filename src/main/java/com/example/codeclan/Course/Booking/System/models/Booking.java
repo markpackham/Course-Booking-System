@@ -1,19 +1,16 @@
 package com.example.codeclan.Course.Booking.System.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-@Table(name="bookings")
+@Table(name = "bookings")
 public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="date")
+
+    @Column(name = "date")
     private String date;
 
     @ManyToOne
@@ -30,8 +27,7 @@ public class Booking {
         this.customer = customer;
     }
 
-    public Booking(){
-
+    public Booking() {
     }
 
     public Long getId() {
